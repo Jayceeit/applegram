@@ -1,0 +1,175 @@
+/*
+ * https://github.com/morethanwords/tweb
+ * Copyright (C) 2019-2021 Eduard Kuzmenko
+ * https://github.com/morethanwords/tweb/blob/master/LICENSE
+ */
+
+// ! https://icomoon.io/app/#/select
+
+$tgico-font-family: "tgico" !default;
+$tgico-font-path: "assets/fonts" !default;
+
+/*
+! CAN RUN IN DEVELOPER TOOLS TO CONVERT FONT TO VARIABLES:
+`.tgico-select:before {
+  content: "\e900";
+}`
+.toLowerCase()
+.replace(/([\s])|(_svg)|(1x)/g, '')
+.replace(/\.(.+?):before\{content:"(.+?);\}/g, `$$$1: "\\$2;\n`);
+*/
+
+$tgico-avatarnext: "\e900";
+$tgico-avatarprevious: "\e901";
+$tgico-forward_filled: "\e902";
+$tgico-reply_filled: "\e903";
+$tgico-check: "\e904";
+$tgico-checks: "\e905";
+$tgico-activesessions: "\e906";
+$tgico-add: "\e907";
+$tgico-addmember_filled: "\e908";
+$tgico-adduser: "\e909";
+$tgico-admin: "\e90a";
+$tgico-animals: "\e90b";
+$tgico-animations: "\e90c";
+$tgico-archive: "\e90d";
+$tgico-arrow_down: "\e90e";
+$tgico-arrow_next: "\e90f";
+$tgico-attach: "\e910";
+$tgico-bold: "\e911";
+$tgico-botcom: "\e912";
+$tgico-bots: "\e913";
+$tgico-bug: "\e914";
+$tgico-calendar: "\e915";
+$tgico-calendarfilter: "\e916";
+$tgico-camera: "\e917";
+$tgico-cameraadd: "\e918";
+$tgico-car: "\e919";
+$tgico-channel: "\e91a";
+$tgico-channelviews: "\e91b";
+$tgico-chatspinned: "\e91c";
+$tgico-chatsplaceholder: "\e91d";
+$tgico-check1: "\e91e";
+$tgico-checkbox: "\e91f";
+$tgico-checkboxblock: "\e920";
+$tgico-checkboxempty: "\e921";
+$tgico-checkboxon: "\e922";
+$tgico-checkretract: "\e923";
+$tgico-checkround: "\e924";
+$tgico-close: "\e925";
+$tgico-clouddownload: "\e926";
+$tgico-colorize: "\e927";
+$tgico-comments: "\e928";
+$tgico-commentssticker: "\e929";
+$tgico-copy: "\e92a";
+$tgico-darkmode: "\e92b";
+$tgico-data: "\e92c";
+$tgico-delete_filled: "\e92d";
+$tgico-delete: "\e92e";
+$tgico-deletedaccount: "\e92f";
+$tgico-deleteleft: "\e930";
+$tgico-deleteuser: "\e931";
+$tgico-devices: "\e932";
+$tgico-document: "\e933";
+$tgico-down: "\e934";
+$tgico-download: "\e935";
+$tgico-dragfiles: "\e936";
+$tgico-dragmedia: "\e937";
+$tgico-eats: "\e938";
+$tgico-edit: "\e939";
+$tgico-email: "\e93a";
+$tgico-enter: "\e93b";
+$tgico-eye1: "\e93c";
+$tgico-eye2: "\e93d";
+$tgico-favourites: "\e93e";
+$tgico-flag: "\e93f";
+$tgico-folder: "\e940";
+$tgico-fontsize: "\e941";
+$tgico-forward: "\e942";
+$tgico-fullscreen: "\e943";
+$tgico-gifs: "\e944";
+$tgico-group: "\e945";
+$tgico-help: "\e946";
+$tgico-image: "\e947";
+$tgico-info: "\e948";
+$tgico-info2: "\e949";
+$tgico-italic: "\e94a";
+$tgico-keyboard: "\e94b";
+$tgico-lamp: "\e94c";
+$tgico-language: "\e94d";
+$tgico-largepause: "\e94e";
+$tgico-largeplay: "\e94f";
+$tgico-left: "\e950";
+$tgico-link: "\e951";
+$tgico-livelocation: "\e952";
+$tgico-location: "\e953";
+$tgico-lock: "\e954";
+$tgico-lockoff: "\e955";
+$tgico-loginlogodesktop: "\e956";
+$tgico-loginlogomobile: "\e957";
+$tgico-logout: "\e958";
+$tgico-mention: "\e959";
+$tgico-menu: "\e95a";
+$tgico-message: "\e95b";
+$tgico-messageunread: "\e95c";
+$tgico-microphone: "\e95d";
+$tgico-minus: "\e95e";
+$tgico-monospace: "\e95f";
+$tgico-more: "\e960";
+$tgico-mute: "\e961";
+$tgico-muted: "\e962";
+$tgico-newchannel: "\e963";
+$tgico-newchat_filled: "\e964";
+$tgico-newgroup: "\e965";
+$tgico-newprivate: "\e966";
+$tgico-next: "\e967";
+$tgico-noncontacts: "\e968";
+$tgico-nosound: "\e969";
+$tgico-passwordoff: "\e96a";
+$tgico-pause: "\e96b";
+$tgico-permissions: "\e96c";
+$tgico-phone: "\e96d";
+$tgico-pin: "\e96e";
+$tgico-pinlist: "\e96f";
+$tgico-pinned_filled: "\e970";
+$tgico-pinnedchat: "\e971";
+$tgico-play: "\e972";
+$tgico-plus: "\e973";
+$tgico-poll: "\e974";
+$tgico-previous: "\e975";
+$tgico-radiooff: "\e976";
+$tgico-radioon: "\e977";
+$tgico-readchats: "\e978";
+$tgico-recent: "\e979";
+$tgico-replace: "\e97a";
+$tgico-reply: "\e97b";
+$tgico-saved: "\e97c";
+$tgico-savedmessages: "\e97d";
+$tgico-schedule: "\e97e";
+$tgico-scheduled: "\e97f";
+$tgico-search: "\e980";
+$tgico-select: "\e981";
+$tgico-send: "\e982";
+$tgico-send2: "\e983";
+$tgico-sending: "\e984";
+$tgico-sendingerror: "\e985";
+$tgico-settings: "\e986";
+$tgico-smallscreen: "\e987";
+$tgico-smile: "\e988";
+$tgico-sport: "\e989";
+$tgico-stickers: "\e98a";
+$tgico-stop: "\e98b";
+$tgico-strikethrough: "\e98c";
+$tgico-textedit: "\e98d";
+$tgico-tip: "\e98e";
+$tgico-tools: "\e98f";
+$tgico-unarchive: "\e990";
+$tgico-underline: "\e991";
+$tgico-unmute: "\e992";
+$tgico-unpin: "\e993";
+$tgico-unread: "\e994";
+$tgico-up: "\e995";
+$tgico-user: "\e996";
+$tgico-username: "\e997";
+$tgico-zoomin: "\e998";
+$tgico-zoomout: "\e999";
