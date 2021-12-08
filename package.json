@@ -15,8 +15,7 @@
     "whybundled": "npm run profile && whybundled stats.json",
     "generate-mtproto-types": "node ./src/scripts/generate_mtproto_types.js src/",
     "generate-changelog": "node ./src/scripts/generate_changelog.js",
-    "change-version": "node ./src/scripts/change_version.js",
-    "deploy" : "npm run build && gh-pages -d dist"
+    "change-version": "node ./src/scripts/change_version.js"
   },
   "author": "",
   "license": "GPL-3.0-only",
@@ -48,7 +47,6 @@
     "dotenv-webpack": "^7.0.3",
     "express": "^4.17.1",
     "fast-png": "^5.0.4",
-    "gh-pages": "^3.2.3",
     "handlebars": "^4.7.7",
     "handlebars-loader": "^1.7.1",
     "html-webpack-plugin": "^4.5.2",
