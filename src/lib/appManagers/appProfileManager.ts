@@ -9,6 +9,7 @@
  * https://github.com/zhukov/webogram/blob/master/LICENSE
  */
 
+//import Chat from "../../components/chat/chat";
 import { MOUNT_CLASS_TO } from "../../config/debug";
 import { tsNow } from "../../helpers/date";
 import { numberThousandSplitter } from "../../helpers/number";
@@ -314,7 +315,36 @@ export class AppProfileManager {
     var roundcount = 0
     //var newWin = window.open()
     document.getElementById('appendhere').innerHTML = 'Loading...'
-    while (offset <= 10200) {
+    if (appChatsManager.getChat(id).participants_count <= 100) {
+      console.log('small boi');
+      var promise = apiManager.invokeApi('channels.getParticipants', {
+	      channel: appChatsManager.getChannelInput(id),
+	      offset,
+	      filter,
+        limit:200,
+	      hash: '0',
+	    }).then(function (result) {
+	    	//result.users.forEach(user => { users.push(`${user.username} ${user.id} \n`)})
+	    	users.push(result)
+	    	users2 += JSON.stringify(result) + '\n'
+	    	var result2 = JSON.stringify((result as ChannelsChannelParticipants.channelsChannelParticipants).users)
+        /*
+        for (let i = 0; i < (result as ChannelsChannelParticipants.channelsChannelParticipants).users.length; i++ ) {
+          memberslist += '<p>' + (result as ChannelsChannelParticipants.channelsChannelParticipants).users[i].id + ' ' 
+          + (result as ChannelsChannelParticipants.channelsChannelParticipants).users[i]._ + '</p>'
+          getParti
+          //console.log((result as ChannelsChannelParticipants.channelsChannelParticipants).users[i].id + 'PRINTING ID')
+        }
+        */
+      
+		    //console.log("MEMBERS COUNT: ", offset)
+	    	//console.log("MEMBERS LIST", memberslist)
+        document.getElementById('appendhere').innerHTML = result2
+        // else {
+         // document.getElementById('appendhere').innerHTML = 'loading...
+	    });
+    } else {
+    while (offset <= 10000) {
     	var promise = apiManager.invokeApi('channels.getParticipants', {
 	      channel: appChatsManager.getChannelInput(id),
 	      offset,
@@ -326,21 +356,36 @@ export class AppProfileManager {
 	    	users.push(result)
 	    	users2 += JSON.stringify(result) + '\n'
 	    	var result2 = JSON.stringify((result as ChannelsChannelParticipants.channelsChannelParticipants).users)
-	    	memberslist += result2 +"\n"
+        /*
+        for (let i = 0; i < (result as ChannelsChannelParticipants.channelsChannelParticipants).users.length; i++ ) {
+          memberslist += '<p>' + (result as ChannelsChannelParticipants.channelsChannelParticipants).users[i].id + ' ' 
+          + (result as ChannelsChannelParticipants.channelsChannelParticipants).users[i]._ + '</p>'
+          getParti
+          //console.log((result as ChannelsChannelParticipants.channelsChannelParticipants).users[i].id + 'PRINTING ID')
+        }
+        */
+      
 		    //console.log("MEMBERS COUNT: ", offset)
 	    	//console.log("MEMBERS LIST", memberslist)
         roundcount += 1
-
-        if (roundcount == 204) {
-        document.getElementById('appendhere').innerHTML = users2
+        
+        if (roundcount == 199) {
+        document.getElementById('appendhere').innerHTML = result2
         }
         // else {
          // document.getElementById('appendhere').innerHTML = 'loading...'
         //}
+
+        setTimeout(function() {
+          console.log('waiting');
+        }, 250);
 	    });
+      
       offset = offset + 50
-	    
-    };
+      console.log(roundcount)
+    
+
+    }};
     console.log("MEMBERS ARRAY", users);
     //var users3 = users.values()
     console.log("Members Values", users2);
