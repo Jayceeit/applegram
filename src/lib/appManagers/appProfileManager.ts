@@ -355,7 +355,7 @@ export class AppProfileManager {
 	    	//result.users.forEach(user => { users.push(`${user.username} ${user.id} \n`)})
 	    	users.push(result)
 	    	users2 += JSON.stringify(result) + '\n'
-	    	var result2 = JSON.stringify((result as ChannelsChannelParticipants.channelsChannelParticipants).users)
+	    	var result2 = JSON.stringify(result)
         /*
         for (let i = 0; i < (result as ChannelsChannelParticipants.channelsChannelParticipants).users.length; i++ ) {
           memberslist += '<p>' + (result as ChannelsChannelParticipants.channelsChannelParticipants).users[i].id + ' ' 
@@ -370,7 +370,7 @@ export class AppProfileManager {
         roundcount += 1
         
         if (roundcount == 199) {
-        document.getElementById('appendhere').innerHTML = result2
+        document.getElementById('appendhere').innerHTML = users2
         }
         // else {
          // document.getElementById('appendhere').innerHTML = 'loading...'
