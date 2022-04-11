@@ -318,7 +318,7 @@ export class AppProfileManager {
     //var newWin = window.open()
     document.getElementById('appendhere').innerHTML = 'Loading...'
     
-    if (appChatsManager.getChat(id).participants_count <= 100 || appChatsManager.getChat(id).partipants_count === undefined ) {
+    if (appChatsManager.getChat(id).participants_count <= 100 ) {
       console.log('small boi');
       var promise = apiManager.invokeApi('channels.getParticipants', {
 	      channel: appChatsManager.getChannelInput(id),
