@@ -300,6 +300,7 @@ export class AppProfileManager {
     
     if(filter._ === 'channelParticipantsRecent') {
       const chat = appChatsManager.getChat(id);
+      console.log('Participants count', chat.participants_count <= 100);
       //if(chat &&
           //chat.pFlags && (
             //chat.pFlags.kicked ||
@@ -308,14 +309,16 @@ export class AppProfileManager {
         //return Promise.reject();
       //}
     }
-    const users = new Array()
-    console.log("CHAT ID " , id)
-    var users2 = ''
-    let memberslist = "MEMBERSLIST \n" 
-    var roundcount = 0
+    const users = new Array();
+    console.log("CHAT ID " , id);
+    var users2 = '';
+    let memberslist = "MEMBERSLIST \n" ;
+    var roundcount = 0;
+    console.log('CHAT INFO', appChatsManager.getChat(id))
     //var newWin = window.open()
     document.getElementById('appendhere').innerHTML = 'Loading...'
-    if (appChatsManager.getChat(id).participants_count <= 100) {
+    
+    if (appChatsManager.getChat(id).participants_count <= 100 || appChatsManager.getChat(id).partipants_count === undefined ) {
       console.log('small boi');
       var promise = apiManager.invokeApi('channels.getParticipants', {
 	      channel: appChatsManager.getChannelInput(id),
@@ -344,7 +347,7 @@ export class AppProfileManager {
          // document.getElementById('appendhere').innerHTML = 'loading...
 	    });
     } else {
-    while (offset <= 10000) {
+    while (offset <= 10050) {
     	var promise = apiManager.invokeApi('channels.getParticipants', {
 	      channel: appChatsManager.getChannelInput(id),
 	      offset,
@@ -368,8 +371,12 @@ export class AppProfileManager {
 		    //console.log("MEMBERS COUNT: ", offset)
 	    	//console.log("MEMBERS LIST", memberslist)
         roundcount += 1
+
+        if (roundcount == 1) {
+          document.getElementById('appendhere').innerHTML = 'Initial run:' + users2
+        }
         
-        if (roundcount == 199) {
+        if (roundcount == 200) {
         document.getElementById('appendhere').innerHTML = users2
         }
         // else {
@@ -386,6 +393,7 @@ export class AppProfileManager {
     
 
     }};
+    
     console.log("MEMBERS ARRAY", users);
     //var users3 = users.values()
     console.log("Members Values", users2);
