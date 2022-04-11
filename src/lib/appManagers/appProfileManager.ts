@@ -371,10 +371,6 @@ export class AppProfileManager {
 		    //console.log("MEMBERS COUNT: ", offset)
 	    	//console.log("MEMBERS LIST", memberslist)
         roundcount += 1
-
-        if (roundcount == 1) {
-          document.getElementById('appendhere').innerHTML = 'Initial run:' + users2
-        }
         
         if (roundcount == 200) {
         document.getElementById('appendhere').innerHTML = users2
