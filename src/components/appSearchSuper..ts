@@ -1127,7 +1127,8 @@ export default class AppSearchSuper {
     const id = this.searchContext.peerId.toChatId();
     const middleware = this.middleware.get();
     let promise: Promise<void>;
-
+    
+    // Showing participants in the side bar
     const renderParticipants = async(participants: (ChatParticipant | ChannelParticipant)[]) => {
       if(this.loadMutex) {
         await this.loadMutex;
