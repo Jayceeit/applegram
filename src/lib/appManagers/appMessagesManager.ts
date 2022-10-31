@@ -5486,34 +5486,34 @@ export class AppMessagesManager {
       hash: 0
     };
 
-    let messages: any[] = []
-    async function tester123(){
-      let num = appMessagesIdsManager.getServerMessageId(maxId) + 1
-      console.log(num, 'DATA DATA')
-      while(num > 0){
-        const options: any = {
-          peer: appPeersManager.getInputPeerById(peerId),
-          offset_id: num,
-          offset_date: offsetDate,
-          add_offset: offset,
-          limit: 100,
-          max_id: 0,
-          min_id: 0,
-          hash: 0
-        };
-        let test = await apiManager.invokeApiSingle('messages.getHistory', options)
-        let convertTest = (test as MessagesMessages.messagesChannelMessages)
-        convertTest.messages.forEach(x => {
-          messages.push(x)
-        })
-        console.log(convertTest, 'MESSAGES')
-        num -= 100
-      }
-      console.log(messages.length, 'THIS IS IT')
+    // let messages: any[] = []
+    // async function tester123(){
+    //   let num = appMessagesIdsManager.getServerMessageId(maxId) + 1
+    //   console.log(num, 'DATA DATA')
+    //   while(num > 0){
+    //     const options: any = {
+    //       peer: appPeersManager.getInputPeerById(peerId),
+    //       offset_id: num,
+    //       offset_date: offsetDate,
+    //       add_offset: offset,
+    //       limit: 100,
+    //       max_id: 0,
+    //       min_id: 0,
+    //       hash: 0
+    //     };
+    //     let test = await apiManager.invokeApiSingle('messages.getHistory', options)
+    //     let convertTest = (test as MessagesMessages.messagesChannelMessages)
+    //     convertTest.messages.forEach(x => {
+    //       messages.push(x)
+    //     })
+    //     console.log(convertTest, 'MESSAGES')
+    //     num -= 100
+    //   }
+    //   console.log(messages.length, 'THIS IS IT')
       
-    }
+    // }
 
-    tester123()
+    // tester123()
     
 
 
