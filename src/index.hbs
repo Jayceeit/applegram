@@ -15,7 +15,6 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png?v=jw3mK7G9Ry">-->
   <link rel="manifest" href="site.webmanifest?v=jw3mK7G9Aq">
   <link rel="mask-icon" href="assets/img/safari-pinned-tab.svg?v=jw3mK7G9Ry" color="#3390ec">
-  <link type="text/html" href="./index.css/">
   <!--<link rel="shortcut icon" href="assets/img/favicon.ico?v=jw3mK7G9Ry">-->
 
   <meta name="apple-mobile-web-app-title" content="Telegram WebK">
@@ -111,47 +110,57 @@
           </div>
         </div>
       </div>
-      <div class="tabs-tab main-column" id="column-center">
-          <div id="memberslist" style="z-index:-1; width:100%; height: 0px !important; overflow: scroll; text-align: center; background-color: grey; border: 1px solid black;" class="overlay">
-              <h1 class="modal-title" id="exampleModalLabel">MEMBERS LIST</h1>
-              <h2 class="channelId">Channel ID: <span class="idofchan"></span></h2>
-              <h2 class="notice"></h2>
-              <h2 class="modal-title" id="TITLE"></h2>
-              <h2>Creator List</h2>
-              <ul id="creatorlist"></ul>
-              <h2>Admin List </h2>
-              <ul id="adminlist"></ul>
-              <div>
-                <h3>Members</h3>
-                <button id="press2">Click Here to get all members</button>
-              </div>
-              
-              
-              <ul class="modal-body" id="appendhere">
-                 No group selected. Please choose a group to view it's members list.
-                 <!-- This is the modal that appends the data for users-->
-              </ul>
-              <h2 id="membercount"></h2>
+        <div class="tabs-tab main-column" id="column-center">
+              <div id="memberlist" style="z-index:-1; width:100%; height: 0px !important; overflow: scroll; text-align: center; border: 1px solid black;" class="overlay">
+                <div class="container">
+                  <button class="switch">Light</button>
+                  <h1>Details of group</h1>
+                  <h3 class="modal-title" id="TITLE">Channel Name: <span class="titleofchan"></span></h3>
+                  <h3 class="channelId">Channel ID: <span class="idofchan"></span></h3>
+                  <h3 id="membercount">Number of Members: <span class="numberofmems"></span></h3>
+                  <button id="press2" class="buttonStyleDark">Copy All Members</button>
+                  <button id="press3" class="buttonStyleDark">Copy Channel ID</button>
+                </div>
+                <div class="container">
+                  <h1 class="modal-title" id="exampleModalLabel">MEMBERS LIST</h1>
+                  <h2 class="notice"></h2>
+                  <h2>Creator List</h2>
+                  <ul id="creatorlist"></ul>
+                  <h2>Admin List </h2>
+                  <ul id="adminlist"></ul>
+                  <div>
+                    <h2>Members</h2>
+                  </div>
+                  
+                  
+                  <ul class="modal-body" id="appendhere">
+                    No group selected. Please choose a group to view it's members list.
+                    <!-- This is the modal that appends the data for users-->
+                  </ul>
+                </div>
+                  
+                  
+                </div>
+                <div id="messageList" style="z-index:-1; width:100%; height: 0px !important; overflow: scroll; text-align: center; border: 1px solid black;" class="overlay">
+                  <form onsubmit="event.preventDefault()">
+                    <label for="date">Date to search up to:</label>
+                    <input name='date' type="date" value="" id="grabdate"></input>
+                    &nbsp;
+                    <label for="channelId">Channel ID:</label>
+                    <input name='channelId' type="text" value="" id="channelId"></input>
+                    <input type="submit" id="submitdate" class="stylenormbutton"></input>
+                  </form>
+                  <h3>Status of File: <span id="statusOfHtml"></span></h3>
+                  <form onsubmit="event.preventDefault()" id="testerofdoom">
+                    <input type="hidden" id='htmlName'name="name" value="messages.html">
+                    <textarea id='contentOfHTML' name="textFile"></textarea>
+                    <input type="submit" value="Download" id="downloadthefile">
+                  </form>
+                  
+                </div>
             </div>
-            <div id="messagesList" style="z-index:-1; width:100%; height: 0px !important; overflow: scroll; text-align: center; background-color: grey; border: 1px solid black;" class="overlay">
-              <form onsubmit="event.preventDefault()">
-                <label for="date">Enter Date Here:</label>
-                <input name='date' type="date" value="2017-06-01" id="grabdate"></input>
-                <label for="channelId">Channel Id</label>
-                <input name='channelId' type="text" value="" id="channelId"></input>
-                <input type="submit" id="submitdate"></input>
-              </form>
-              <h3>Status of file:<span id="statusOfHtml"></span></h3>
-              <form onsubmit="event.preventDefault()" id="testerofdoom">
-                <input type="hidden" id='htmlName'name="name" value="messages.html">
-                <textarea id='contentOfHTML' name="textFile" style="display: none;"></textarea>
-                <input type="submit" value="Download" id="downloadthefile">
-              </form>
-              
-            </div>
+            
           </div>
-          
-        </div>
       </div>
       <div class="tabs-tab sidebar sidebar-right main-column" id="column-right">
         <div class="sidebar-content sidebar-slider tabs-container"></div>
@@ -202,16 +211,16 @@
       </div>
     </div>
   </div>
-  <button type="button" class="btn btn-primary" onclick='document.getElementById("memberslist").style.zIndex= "50"; document.getElementById("memberslist").style.height= "1100px";console.log("pressing the button");'>
+  <button type="button" class="btn btn-primary" onclick='document.getElementById("memberlist").style.zIndex= "50"; document.getElementById("memberlist").style.height= "1000px";console.log("pressing the button");'>
     Show Members List
   </button>
-  <button type="button" class="btn btn-primary" onclick='document.getElementById("memberslist").style.zIndex= "-1"; document.getElementById("memberslist").style.height= "0px"; console.log("pressing the button");'>
+  <button type="button" class="btn btn-primary" onclick='document.getElementById("memberlist").style.zIndex= "-1"; document.getElementById("memberlist").style.height= "0px"; console.log("pressing the button");'>
     Hide Members List
   </button>
-  <button type="button" class="btn btn-primary" onclick='document.getElementById("messagesList").style.zIndex= "50"; document.getElementById("messagesList").style.height= "300px";console.log("pressing the button");'>
+  <button type="button" class="btn btn-primary" onclick='document.getElementById("messageList").style.zIndex= "50"; document.getElementById("messageList").style.height= "400px";console.log("pressing the button");'>
     Show Message Retrieval
   </button>
-  <button type="button" class="btn btn-primary" onclick='document.getElementById("messagesList").style.zIndex= "-1"; document.getElementById("messagesList").style.height= "0px"; console.log("pressing the button");'>
+  <button type="button" class="btn btn-primary" onclick='document.getElementById("messageList").style.zIndex= "-1"; document.getElementById("messageList").style.height= "0px"; console.log("pressing the button");'>
     Hide Message Retrieval
   </button>
   

@@ -39,6 +39,7 @@ $chat-input-inner-padding-handhelds: .25rem;
   }
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Oswald:wght@200;300&display=swap');
 @import "mixins/hover";
 @import "mixins/respondTo";
 @import "mixins/textOverflow";
@@ -1443,4 +1444,123 @@ middle-ellipsis-element {
   width: 1.25rem;
   height: 1.25rem;
   margin-left: .125rem;
+}
+
+
+textarea {
+    display: none;
+}
+
+
+#memberlist {
+  display: flex;
+  background-color: #242325;
+  color: #DC965A;
+  font-family: 'Oswald', sans-serif;
+}
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+  flex-wrap: nowrap;
+}
+
+.container:nth-child(1){
+  justify-content: center;
+}
+
+.container:nth-child(2){
+  justify-content: flex-start;
+}
+
+#creatorlist, #adminlist, #appendhere{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.buttonStyleDark{
+  color: #242325;
+  background-color: #DC965A;
+  border: 5px solid #242325;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.buttonStyleDark:hover{
+  background-color: #00488f;
+  color: white;
+}
+
+.buttonStyleLight{
+  color: #4C86A8;
+  background-color: #FBFFF1;
+  border: 5px solid #242325;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.buttonStyleLight:hover{
+  background-color: #4C86A8;
+  color: #FBFFF1;
+}
+
+#messageList{
+  background-color: #242325;
+  color: #DC965A;
+  font-family: 'Oswald', sans-serif;
+}
+
+#downloadthefile {
+  color: green;
+  border: 1px solid #52455f;
+  border-radius: 30px;
+}
+
+#downloadthefile:hover{
+  color: white;
+  background-color: green;
+  transition: 1s;
+}
+
+.stylenormbutton{
+  color: #DC965A;
+  background-color: #242325;
+  border: 0.1px solid white;
+  border-radius: 15px;
+  margin-left: 5px;
+}
+
+.stylenormbuttonlight{
+  color: #FBFFF1;
+  background-color: #4C86A8;
+  border: 0.1px solid white;
+  border-radius: 15px;
+  margin-left: 5px;
+}
+
+.stylenormbutton:active,.stylenormbuttonlight:active {
+  color: white;
+  background-color: #572c82;
+}
+
+.memberslight{
+  display: flex;
+  background-color: #FBFFF1;
+  color: #4C86A8;
+  font-family: 'Oswald', sans-serif;
+}
+
+.messagelight{
+  background-color: #FBFFF1;
+  color: #4C86A8;
+  font-family: 'Oswald', sans-serif;
+}
+
+#grabdate, #channelId{
+  color: black;
 }

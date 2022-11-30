@@ -61,6 +61,43 @@ console.timeEnd('get storage1'); */
 
     const buttonEl = document.querySelector('#press')
     const buttonElTwo = document.querySelector('#press2')
+    const buttonElThree = document.querySelector('#press3')
+    const buttonLight = document.querySelector('.switch')
+    const selectMembers = document.querySelector('#memberlist') as HTMLDivElement
+    const selectMessages = document.querySelector('#messageList') as HTMLDivElement
+    const submitButton= document.querySelector('#submitdate')
+
+    buttonLight.addEventListener('click', (evt) => {
+      evt.preventDefault()
+      if(buttonElTwo.className === 'buttonStyleDark'){
+        buttonElThree.className = 'buttonStyleLight'
+        buttonElTwo.className = 'buttonStyleLight'
+        selectMembers.style.backgroundColor = '#FBFFF1'
+        selectMembers.style.color = '#4C86A8'
+        selectMessages.style.backgroundColor = '#FBFFF1'
+        selectMessages.style.color = '#4C86A8'
+        buttonLight.textContent = 'Dark'
+        submitButton.className = 'stylenormbuttonlight'
+      } else {
+        selectMembers.style.backgroundColor = ''
+        selectMembers.style.color = ''
+        selectMessages.style.backgroundColor = ''
+        selectMessages.style.color = ''
+        buttonElThree.className = 'buttonStyleDark'
+        buttonElTwo.className = 'buttonStyleDark'
+        buttonLight.textContent = 'Light'
+        submitButton.className = 'stylenormbutton'
+      }
+    })
+    
+
+    buttonElThree.addEventListener('click', async (evt)=>{
+      let channelId = document.querySelector('.idofchan')  
+      let data = await navigator.clipboard.writeText(channelId.textContent).then(() => {
+        alert('copied')
+      })
+    
+    })
 
     buttonElTwo.addEventListener('click', async (evt)=>{
       let memberEl = document.querySelectorAll('.member')
