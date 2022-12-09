@@ -5426,11 +5426,11 @@ export class AppMessagesManager {
 
 
     const val2 = (document.querySelector('#contentOfHTML') as HTMLTextAreaElement)
-    const testingdate = (document.querySelector('#grabdate') as HTMLInputElement)
+    const messagedate = (document.querySelector('#grabdate') as HTMLInputElement)
     const selectStatusEl = document.querySelector('#statusOfHtml')
     const buttonTestingEl = document.querySelector('#submitdate')
     buttonTestingEl.addEventListener('click', () => {
-      let dateObj = new Date(testingdate.value + 'GMT-0500')
+      let dateObj = new Date(messagedate.value + 'GMT-0500')
       
       let unixTime = dateObj.getTime() / 1000
 
@@ -5515,7 +5515,7 @@ export class AppMessagesManager {
       createLinkEl.setAttribute('rel', 'stylesheet')
 
       const createScriptEl = document.createElement('script')
-      createScriptEl.setAttribute('src','js/script.js' )
+      createScriptEl.setAttribute('src','./js/script.js' )
       createScriptEl.setAttribute('type', 'text/javascript')
 
       createHeadEl.appendChild(createScriptEl)
@@ -5526,7 +5526,7 @@ export class AppMessagesManager {
       createHtmlEl.appendChild(createHeadEl)
 
       const bodyEl = document.createElement('body')
-      bodyEl.setAttribute('onload', 'Checklocation()')
+      bodyEl.setAttribute('onload', 'CheckLocation()')
 
       const pageWrapDivEl = document.createElement('div')
       pageWrapDivEl.className = 'page_wrap'
@@ -5554,7 +5554,7 @@ export class AppMessagesManager {
 
       pageBodypageChatDivEl.appendChild(historyDivEl)
 
-      bodyEl.appendChild(pageBodypageChatDivEl)
+      pageWrapDivEl.appendChild(pageBodypageChatDivEl)
 
       createHtmlEl.appendChild(bodyEl)
       
@@ -5580,22 +5580,29 @@ export class AppMessagesManager {
     
     keys.forEach(async (keyVal:any) => {
         try {
+          let replyToObj = {
+            replyStatus: false,
+            replyToId: 0
+          }
+          if(obj[keyVal].hasOwnProperty('reply_to')){
+            replyToObj = {
+              replyStatus: true,
+              replyToId: obj[keyVal].reply_to.reply_to_msg_id
+            }
+          }
           if(!!obj[keyVal].from_id.user_id && !!users[obj[keyVal].from_id.user_id]){
             const val = users[obj[keyVal].from_id.user_id].name;
-            userData.push({name: ' ' + val , msg:obj[keyVal].message, date: obj[keyVal].date})
+            userData.push({name: ' ' + val , msg:obj[keyVal].message, date: obj[keyVal].date, msgId: obj[keyVal].id, reply: replyToObj})
            }else {
-            userData.push({name: ' Name Not Found', msg:obj[keyVal].message, date: obj[keyVal].date})
+            userData.push({name: ' Name Not Found', msg:obj[keyVal].message, date: obj[keyVal].date, msgId: obj[keyVal].id, reply: replyToObj})
            }
         } catch (error) {
           console.log(error)
         }
-      })
+    })
 
     console.log(userData, 'User Data')
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-          
+    const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
     userData.sort((a:any,b:any) => b.date - a.date)
     userData.forEach((x:any) => {
 
@@ -5609,6 +5616,7 @@ export class AppMessagesManager {
         
         const messageDefaultDivEl = document.createElement('div')
         messageDefaultDivEl.className = 'message default clearfix'
+        messageDefaultDivEl.id = 'message' + x.msgId
         
         const userPicWrapDivEl = document.createElement('div')
         userPicWrapDivEl.className = 'pull_left userpic_wrap'
@@ -5650,6 +5658,20 @@ export class AppMessagesManager {
         bodyDivMsg.appendChild(messageServiceCreateEl)
         bodyDivMsg.appendChild(timeDivEl)
         bodyDivMsg.appendChild(nameDivEl)
+
+        if(x.reply.replyStatus){
+          const anchorTag = document.createElement('a')
+          anchorTag.setAttribute('href', `#go_to_message${x.reply.replyToId}`)
+          anchorTag.setAttribute('onclick', `return GoToMessage(${x.reply.replyToId})`)
+          anchorTag.textContent = 'this message'
+
+          const replyToDiv = document.createElement('div')
+          replyToDiv.className = 'reply_to details'
+          replyToDiv.textContent = 'In reply to '
+          replyToDiv.appendChild(anchorTag)
+          bodyDivMsg.appendChild(replyToDiv)
+        }
+
         bodyDivMsg.appendChild(msgDivEl)
         
         messageDefaultDivEl.appendChild(bodyDivMsg)
@@ -5663,10 +5685,26 @@ export class AppMessagesManager {
     }
     val2.textContent += createHtmlEl.innerHTML
     console.log('completed') 
-    
+    console.log(obj)
   }
-
 }
+  // public getReplies(peerid:number, messageId:number){
+  //   const options = {
+  //     peer: appPeersManager.getInputPeerById(peerid),
+  //     msg_id: messageId,
+  //     offset_id: 0,
+  //     offset_date:0,
+  //     add_offset: 0,
+  //     limit: 200,
+  //     max_id: 0,
+  //     min_id: 0,
+  //     hash: 0
+  //   }
+
+  //   let repliesObj = apiManager.invokeApi('messages.getReplies', options)
+  //   console.log(repliesObj)
+
+  // }
 
   public requestHistory(peerId: PeerId, maxId: number, limit = 0, offset = 0, offsetDate = 0, threadId = 0): Promise<Exclude<MessagesMessages, MessagesMessages.messagesMessagesNotModified>> {
     //console.trace('requestHistory', peerId, maxId, limit, offset);
