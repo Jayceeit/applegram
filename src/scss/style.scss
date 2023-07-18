@@ -1239,6 +1239,16 @@ middle-ellipsis-element {
   max-height: 100%;
 }
 
+.video-download-button, .round-video-download-button{
+  width: 60px;
+  height: 20px;
+  margin-left: 10px;
+  font-size: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor:pointer;
+}
+
 .media-round {
   max-width: var(--round-video-size);
   max-height: var(--round-video-size);
