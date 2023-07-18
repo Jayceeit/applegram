@@ -4,6 +4,7 @@
  * https://github.com/morethanwords/tweb/blob/master/LICENSE
  */
 
+import appDocsManager from "../../lib/appManagers/appDocsManager";
 import type { AppImManager } from "../../lib/appManagers/appImManager";
 import type { AppMessagesManager, HistoryResult, HistoryStorage, MyMessage } from "../../lib/appManagers/appMessagesManager";
 import type { AppStickersManager } from "../../lib/appManagers/appStickersManager";
@@ -2316,6 +2317,28 @@ export default class ChatBubbles {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message');
     
+    let videoDownloadButton: HTMLElement;
+    let roundVideoDownloadButton: HTMLElement;
+
+    //  Adding download buttons on videos - regular and round both.
+
+    videoDownloadButton = document.createElement('button');
+    videoDownloadButton.classList.add('video-download-button');
+    videoDownloadButton.textContent = 'Download';
+    videoDownloadButton.id = 'videoDownloadId';
+
+    roundVideoDownloadButton = document.createElement('button');
+    roundVideoDownloadButton.classList.add('round-video-download-button');
+    roundVideoDownloadButton.textContent = 'Download';
+    roundVideoDownloadButton.id = 'roundVideoDownloadId';
+
+    // Function that downloads those videos
+    const downloadVideo = () => {
+      appDocsManager.saveDocFile(doc);
+    }
+
+    videoDownloadButton.addEventListener('click', downloadVideo)
+    roundVideoDownloadButton.addEventListener('click', downloadVideo)
     //messageDiv.innerText = message.message;
 
     let bubbleContainer: HTMLDivElement;
@@ -2455,6 +2478,7 @@ export default class ChatBubbles {
       passEntities: this.passEntities
     });
 
+    const doc = messageMedia.document;
     let canHaveTail = true;
     let isStandaloneMedia = false;
     let needToSetHTML = true;
@@ -2504,6 +2528,14 @@ export default class ChatBubbles {
     const timeSpan = MessageRender.setTime(this.chat, message, bubble, bubbleContainer, messageDiv);
     bubbleContainer.prepend(messageDiv);
     //bubble.prepend(timeSpan, messageDiv); // that's bad
+    
+    if(doc.type == 'video'){
+      bubbleContainer.prepend(videoDownloadButton);
+    }
+
+    if(doc.type =='round'){
+      bubbleContainer.prepend(roundVideoDownloadButton);
+    }
 
     if(message.views && !message.fwd_from?.saved_from_msg_id && this.chat.type !== 'pinned') {
       const forward = document.createElement('div');
