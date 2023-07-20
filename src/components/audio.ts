@@ -3,7 +3,7 @@
  * Copyright (C) 2019-2021 Eduard Kuzmenko
  * https://github.com/morethanwords/tweb/blob/master/LICENSE
  */
-
+import type { AppDocsManager} from "../lib/appManagers/appDocsManager";
 import appDocsManager, {MyDocument} from "../lib/appManagers/appDocsManager";
 import { wrapPhoto } from "./wrappers";
 import ProgressivePreloader from "./preloader";
@@ -266,10 +266,24 @@ function wrapAudio(audioEl: AudioElement) {
 
   const html = `
   <div class="audio-details">
+    <div class="new-buttons-div">
+      <button class="new-buttons" id="audio-download">Download</button>
+    </div>
     <div class="audio-title"></div>
     <div class="audio-subtitle"><div class="audio-time"></div></div>
   </div>`;
   audioEl.insertAdjacentHTML('beforeend', html);
+
+  const downloadAudio = () => {
+    console.log("Message incoming: ", message)
+    appDocsManager.saveDocFile(doc);
+  };
+
+  const audioDownloadButton = audioEl.querySelector('#audio-download') as HTMLElement;
+
+  if (audioDownloadButton) {
+    audioDownloadButton.addEventListener("click", downloadAudio);
+  }
 
   const titleEl = audioEl.querySelector('.audio-title') as HTMLElement;
 
