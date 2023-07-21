@@ -3285,7 +3285,7 @@ export default class ChatBubbles {
   }
 
   public async performHistoryResult(history: number[], reverse: boolean, isBackLimit: boolean, additionMsgId?: number) {
-    // commented bot getProfile in getHistory!
+    // commented bot getProfile in getHistory!..
     // if(!history/* .filter((id: number) => id > 0) */.length) {
     //   if(!isBackLimit) {
     //     this.scrollable.loadedAll.top = true;
