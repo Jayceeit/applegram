@@ -314,7 +314,6 @@ export class AppProfileManager {
       });
     });
   }
-<<<<<<< HEAD
   
   public getChannelParticipants(id: ChatId, filter: ChannelParticipantsFilter = {_: 'channelParticipantsRecent'}, limit = 100, offset = 0) {
     
@@ -578,34 +577,6 @@ export class AppProfileManager {
         users2 += JSON.stringify(result) + '\n'
         var result2 = JSON.stringify((result as ChannelsChannelParticipants.channelsChannelParticipants).users)
         console.log(users, 'DATA DATA')
-=======
-
-  public getChannelParticipants(id: ChatId, filter: ChannelParticipantsFilter = {_: 'channelParticipantsRecent'}, limit = 200, offset = 0) {
-
-    const chat = appChatsManager.getChat(id);
-    const users = new Array();
-    console.log("CHAT ID " , id);
-    var users2 = id + '\n';
-    let memberslist = "MEMBERSLIST \n" ;
-    var roundcount = 0;
-    console.log('CHAT INFO', appChatsManager.getChat(id))
-    //var newWin = window.open()
-    document.getElementById('appendhere').innerHTML = 'Loading...'
-    
-    if (appChatsManager.getChat(id).participants_count <= 100 ) {
-      console.log('small boi');
-      var promise = apiManager.invokeApi('channels.getParticipants', {
-	      channel: appChatsManager.getChannelInput(id),
-	      offset,
-	      filter,
-        limit:200,
-	      hash: '0',
-	    }).then(function (result) {
-	    	//result.users.forEach(user => { users.push(`${user.username} ${user.id} \n`)})
-	    	users.push(result)
-	    	users2 += JSON.stringify(result) + '\n'
-	    	var result2 = JSON.stringify((result as ChannelsChannelParticipants.channelsChannelParticipants).users)
->>>>>>> a7fa36a6d10a633ebae730cbc0ec26d8f69c13fb
         /*
         for (let i = 0; i < (result as ChannelsChannelParticipants.channelsChannelParticipants).users.length; i++ ) {
           memberslist += '<p>' + (result as ChannelsChannelParticipants.channelsChannelParticipants).users[i].id + ' ' 
@@ -614,7 +585,6 @@ export class AppProfileManager {
           //console.log((result as ChannelsChannelParticipants.channelsChannelParticipants).users[i].id + 'PRINTING ID')
         }
         */
-<<<<<<< HEAD
         memberslist += result2
       
         //console.log("MEMBERS COUNT: ", offset)
@@ -626,73 +596,15 @@ export class AppProfileManager {
         }
         // else {
         // document.getElementById('appendhere').innerHTML = 'loading...'
-=======
-      
-		    //console.log("MEMBERS COUNT: ", offset)
-	    	//console.log("MEMBERS LIST", memberslist)
-        document.getElementById('appendhere').innerHTML = '<p><strong>' + chat.title + '</strong><p>' + result2
-        // else {
-         // document.getElementById('appendhere').innerHTML = 'loading...
-	    });
-    } else {
-    while (offset <= 10050) {
-    	var promise = apiManager.invokeApi('channels.getParticipants', {
-	      channel: appChatsManager.getChannelInput(id),
-	      offset,
-	      filter,
-	      limit,
-	      hash: '0'
-	    }).then(function (result) {
-	    	//result.users.forEach(user => { users.push(`${user.username} ${user.id} \n`)})
-	    	users.push(result)
-	    	users2 += JSON.stringify(result) + '\n'
-	    	var result2 = JSON.stringify(result)
-        /*
-        for (let i = 0; i < (result as ChannelsChannelParticipants.channelsChannelParticipants).users.length; i++ ) {
-          memberslist += '<p>' + (result as ChannelsChannelParticipants.channelsChannelParticipants).users[i].id + ' ' 
-          + (result as ChannelsChannelParticipants.channelsChannelParticipants).users[i]._ + '</p>'
-          getParti
-          //console.log((result as ChannelsChannelParticipants.channelsChannelParticipants).users[i].id + 'PRINTING ID')
-        }
-        */
-      
-		    //console.log("MEMBERS COUNT: ", offset)
-	    	//console.log("MEMBERS LIST", memberslist)
-        roundcount += 1
-        
-        if (roundcount == 200) {
-        document.getElementById('appendhere').innerHTML = '<p><strong>' + chat.title + '</strong><p>' + users2
-        }
-        // else {
-         // document.getElementById('appendhere').innerHTML = 'loading...'
-        //}
->>>>>>> a7fa36a6d10a633ebae730cbc0ec26d8f69c13fb
 
         setTimeout(function() {
           console.log('waiting');
         }, 250);
-<<<<<<< HEAD
       });
       
       offset = offset + 50
       // console.log(roundcount)
     
-=======
-	    });
-      
-      offset = offset + 50
-      console.log(roundcount)
-    
-
-    }};
-    
-    console.log("MEMBERS ARRAY", users);
-    //var users3 = users.values()
-    console.log("Members Values", users2);
-    console.log("MEMBERS LIST", memberslist)
-    //var users3 = users2.join()
-    //console.log("MEMBERS JOINED", users3);
->>>>>>> a7fa36a6d10a633ebae730cbc0ec26d8f69c13fb
 
     }};
       // console.log("MEMBERS ARRAY", users);
