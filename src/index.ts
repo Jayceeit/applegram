@@ -95,6 +95,11 @@ console.timeEnd('get storage1'); */
 
     // * This button will run the scrollClass with is a class houses all the methods to run the autoscroll feature 
     buttonElFive.addEventListener('click', () => {
+
+      // let scrollEl = document.querySelectorAll('.scrollable')[3].setAttribute('id', 'secure')
+      // let rerun = document.querySelector('#secure')
+      // scrollClass.scrollChannel(rerun)
+
       HTMLElement:[]
       let test = document.querySelectorAll('.scrollable.scrollable-y')
       let scrollEls:any[] = []
