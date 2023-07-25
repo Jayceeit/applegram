@@ -2312,6 +2312,9 @@ export default class ChatBubbles {
     /* if(DEBUG) {
       this.log.debug('message to render:', message);
     } */
+    let messageMedia = message.media;
+    const doc = messageMedia?.document ?? null;
+
     if (!bubble && this.bubbles[message.mid]) {
       return;
     }
@@ -2472,8 +2475,6 @@ export default class ChatBubbles {
       return bubble;
     }
 
-    let messageMedia = message.media;
-
     let messageMessage: string, totalEntities: MessageEntity[];
     if (messageMedia?.document && !['video', 'gif'].includes(messageMedia.document.type)) {
       // * just filter these cases for documents caption
@@ -2496,7 +2497,7 @@ export default class ChatBubbles {
       passEntities: this.passEntities
     });
 
-    const doc = messageMedia.document;
+    
     let canHaveTail = true;
     let isStandaloneMedia = false;
     let needToSetHTML = true;
@@ -2547,11 +2548,11 @@ export default class ChatBubbles {
     bubbleContainer.prepend(messageDiv);
     //bubble.prepend(timeSpan, messageDiv); // that's bad
 
-    if(doc.type == 'video'){
+    if (doc !== null && doc.type == 'video') {
       bubbleContainer.prepend(videoDownloadButton);
     }
 
-    if(doc.type =='round'){
+    if(doc !== null && doc.type =='round'){
       bubbleContainer.prepend(roundVideoDownloadButton);
     }
 
