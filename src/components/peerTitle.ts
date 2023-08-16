@@ -45,7 +45,7 @@ export default class PeerTitle {
     this.element = document.createElement('span');
     this.element.classList.add('peer-title');
     this.element.setAttribute('dir', 'auto');
-    
+   
     this.update(options);
     weakMap.set(this.element, this);
   }
@@ -58,13 +58,38 @@ export default class PeerTitle {
         // @ts-ignore
         this[i] = options[i];
       }
-    }
+    } 
+    let username = appPeersManager.getPeerUsername(this.peerId);
 
     if(this.peerId !== rootScope.myId || !this.dialog) {
       if(this.peerId.isUser() && appUsersManager.getUser(this.peerId).pFlags.deleted) {
         replaceContent(this.element, i18n(this.onlyFirstName ? 'Deleted' : 'HiddenName'));
-      } else {
-        this.element.innerHTML = appPeersManager.getPeerTitle(this.peerId, this.plainText, this.onlyFirstName) + '\nID: ' + this.peerId;
+      }else {
+        const titleText = '<span class="display-name">' + appPeersManager.getPeerTitle(this.peerId, this.plainText, this.onlyFirstName) + '</span>';
+        
+        const idSpan = document.createElement('span');
+        idSpan.textContent = 'ID:' + this.peerId;
+        idSpan.classList.add('userId');
+        idSpan.style.color = 'skyblue';
+        idSpan.style.paddingLeft = '10px';
+
+        const usernameElement = document.createElement('span');
+        usernameElement.classList.add('username');
+        usernameElement.style.color = 'gold';
+        usernameElement.style.paddingLeft = '10px';
+
+    
+        if (username) {
+          usernameElement.textContent = '@' + username;
+          this.element.innerHTML = titleText;
+          this.element.appendChild(idSpan);
+          this.element.appendChild(usernameElement);
+        } else {
+          usernameElement.textContent = ''; 
+          this.element.innerHTML = titleText;
+          this.element.appendChild(idSpan);
+          this.element.appendChild(usernameElement);
+        }
       }
     } else {
       replaceContent(this.element, i18n(this.onlyFirstName ? 'Saved' : 'SavedMessages'));

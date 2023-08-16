@@ -89,7 +89,7 @@ export class AppSidebarRight extends SidebarSlider {
     }
 
     const animationPromise = appImManager.selectTab(active ? 1 : 2, animate);
-    //document.body.classList.toggle(RIGHT_COLUMN_ACTIVE_CLASSNAME, enable);
+    document.body.classList.toggle(RIGHT_COLUMN_ACTIVE_CLASSNAME, enable);
     //Commenting out disables the broken sidebar popping out when clicking on the username
     return animationPromise;
 
