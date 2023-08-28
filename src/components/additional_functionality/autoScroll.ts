@@ -62,26 +62,39 @@ export class Scroll{
         scrapeListEl.innerHTML = ''
         const keys_of_array = Object.keys(obj)
         keys_of_array.forEach(id => {
-            let split_data:any[] = obj[id].split(' ')
-            const split_data_length = split_data.length - 1
-            let username 
-            // * appUserManager.users is an exposed api containing information on members of a group or channel 
-            // * This will use the key to check and see if more details about a certain can be obtain 
-            if (!!appUsersManager.users[split_data[split_data.length - 1]]){
-                if('username' in appUsersManager.users[split_data[split_data_length]]){
-                    username = `@${appUsersManager.users[split_data[split_data_length]].username}`
-                } else {
-                    username = ''
-                }
+            let split_data: string = obj[id];
+            let displayName = '';
+            let username = '';
+            let userID = '';
+    
+            const usernameMatch = split_data.match(/@([^ ]+)/);
+            if (usernameMatch) {
+                username = `@${usernameMatch[1]}`;
+                split_data = split_data.replace(usernameMatch[0], '');
             }
-            const create_list_el = document.createElement('li')
-            create_list_el.className = 'scraped-user'
-            create_list_el.textContent = `${split_data.join(' ').replace(/([0-9])/g,'')} ${username !== undefined ? username : ''} ( ${split_data[split_data.length - 1]} )`
-            scrapeListEl.appendChild(create_list_el)
-            this.count += 1
-            this.scrape_status.textContent = 'Done'
-        })
-        this.scrape_count.textContent = `${this.count}`
+    
+            const userIDMatch = split_data.match(/\d{6,10}/);
+            if (userIDMatch) {
+                userID = `( ${userIDMatch[0]} )`;
+                split_data = split_data.replace(userIDMatch[0], '');
+            }
+
+            displayName = split_data.trim();
+    
+            const create_list_el = document.createElement('li');
+            create_list_el.className = 'scraped-user';
+
+            if (username) {
+                create_list_el.textContent = `${displayName} ${username} ${userID}`;
+            } else {
+                create_list_el.textContent = `${displayName} ${userID}`;
+            }
+            scrapeListEl.appendChild(create_list_el);
+    
+            this.count += 1;
+            this.scrape_status.textContent = 'Done';
+        }); 
+        this.scrape_count.textContent = `${this.count}`;
     }
 }
 export const scrollClass = new Scroll([])
